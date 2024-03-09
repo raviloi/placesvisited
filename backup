@@ -1,0 +1,126 @@
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+
+const app = express();
+const port = 3000
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('public'));
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/countryDB');
+}
+
+//Schema for country name
+
+const countrySchema = new mongoose.Schema({
+  countryName: String,
+  });
+
+  const Country = mongoose.model('Country', countrySchema);
+ 
+//Schema for 
+
+  //Get route//
+app.get("/", function(req, res){
+
+  Country.find().count({}).then(function(count) {
+    console.log('there are %d countryName', count);
+  
+  
+
+
+Country.find({}).then(function(countries){
+  res.render("index.ejs", {countries, count} );
+});
+});
+});
+
+  //Add country route//
+app.get("/add", function(req,res){
+  res.render("add.ejs")
+  });
+  
+
+// app.get("/edit/:_id", function(req, res){
+
+//   Book.findById({ _id: new mongoose.Types.ObjectId(req.params._id) }).then(function(foundBook){
+//     res.render("edit.ejs", {foundBook} );
+//   }).catch(function(err){
+//     console.log(err);
+//   });    
+//   });
+
+
+const countries_visited = [{name: "AE"},	{name: "AF"},	{name: "AL"},	{name: "AM"},	{name: "AO"},	{name: "AE"},	{name: "AT"},	{name: "AU"},	{name: "AZ"},	{name: "BA"},	{name: "BD"},	{name: "BE"},	{name: "BF"},	{name: "BG"},	{name: "BI"},	{name: "BJ"},	{name: "BN"},	{name: "BO"},	{name: "BR"},	{name: "BS"},	{name: "BT"},	{name: "BW"},	{name: "BY"},	{name: "BZ"},	{name: "CA"},	{name: "CD"},	{name: "CF"},	{name: "CG"},	{name: "CH"},	{name: "CI"},	{name: "CL"},	{name: "CM"},	{name: "CN"},	{name: "CO"},	{name: "CR"},	{name: "CU"},	{name: "CY"},	{name: "CZ"},	{name: "DE"},	{name: "DJ"},	{name: "DK"},	{name: "DO"},	{name: "DZ"},	{name: "EC"},	{name: "EE"},	{name: "EG"},	{name: "EH"},	{name: "ER"},	{name: "ES"},	{name: "ET"},	{name: "FK"},	{name: "FI"},	{name: "FJ"},	{name: "FR"},	{name: "GA"},	{name: "GB"},	{name: "GE"},	{name: "GF"},	{name: "GH"},	{name: "GL"},	{name: "GM"},	{name: "GN"},	{name: "GQ"},	{name: "GR"},	{name: "GT"},	{name: "GW"},	{name: "GY"},	{name: "HN"},	{name: "HR"},	{name: "HT"},	{name: "HU"},	{name: "ID"},	{name: "IE"},	{name: "IL"},	{name: "IN"},	{name: "IQ"},	{name: "IR"},	{name: "IS"},	{name: "IT"},	{name: "JM"},	{name: "JO"},	{name: "JP"},	{name: "KE"},	{name: "KG"},	{name: "KH"},	{name: "KP"},	{name: "KR"},	{name: "XK"},	{name: "KW"},	{name: "KZ"},	{name: "LA"},	{name: "LB"},	{name: "LK"},	{name: "LR"},	{name: "LS"},	{name: "LT"},	{name: "LU"},	{name: "LV"},	{name: "LY"},	{name: "MA"},	{name: "MD"},	{name: "ME"},	{name: "MG"},	{name: "MK"},	{name: "ML"},	{name: "MM"},	{name: "MN"},	{name: "MR"},	{name: "MW"},	{name: "MX"},	{name: "MY"},	{name: "MZ"},	{name: "NA"},	{name: "NC"},	{name: "NE"},	{name: "NG"},	{name: "NI"},	{name: "NL"},	{name: "NO"},	{name: "NP"},	{name: "NZ"},	{name: "OM"},	{name: "PA"},	{name: "PE"},	{name: "PG"},	{name: "PH"},	{name: "PL"},	{name: "PK"},	{name: "PR"},	{name: "PS"},	{name: "PT"},	{name: "PY"},	{name: "QA"},	{name: "RO"},	{name: "RS"},	{name: "RU"},	{name: "RW"},	{name: "SA"},	{name: "SB"},	{name: "SD"},	{name: "SE"},	{name: "SI"},	{name: "SJ"},	{name: "SK"},	{name: "SL"},	{name: "SN"},	{name: "SO"},	{name: "SR"},	{name: "SS"},	{name: "SV"},	{name: "SY"},	{name: "SZ"},	{name: "TD"},	{name: "TF"},	{name: "TG"},	{name: "TH"},	{name: "TJ"},	{name: "TL"},	{name: "TM"},	{name: "TN"},	{name: "TR"},	{name: "TT"},	{name: "TW"},	{name: "TZ"},	{name: "UA"},	{name: "UG"},	{name: "US"},	{name: "UY"},	{name: "UZ"},	{name: "VE"},	{name: "VN"},	{name: "VU"},	{name: "YE"},	{name: "ZA"},	{name: "ZM"},	{name: "ZW"}];
+
+
+app.post("/compose", function(req, res){
+// console.log(req.body.data);
+
+Country.findOne({ countryName: req.body.countryName }).then(function(foundTitle){
+  if (! foundTitle){
+      console.log("doesnt exist");
+
+      const country1 = new Country({ 
+        countryName: req.body.countryName,
+      });
+      
+      country1.save();
+      res.redirect("/");
+
+          }
+          else {console.log("exists");}
+
+                }
+).catch(function(err){
+console.log(err);
+ 
+});
+
+     
+
+
+});
+
+// app.post("/edit/post/:_id", function(req, res){
+//   console.log(req.body);
+
+//  const update = (req.params._id);
+//   Book.findByIdAndUpdate({_id : new mongoose.Types.ObjectId(update)},
+//   {summary: req.body.summary, title: req.body.title, author: req.body.author }      
+
+
+//   )
+//     .then((foundEditBook) => {
+//     console.log(foundEditBook);
+//     console.log("saved");
+//     res.redirect("/" );
+ 
+//     }).catch((err) => {
+//       console.log(err);
+//     });
+//   });
+
+// app.get("/delete/:_id", function(req, res){
+//   console.log(req.params._id);
+//   const deleteId = req.params._id;
+
+// Book.deleteOne( { _id: deleteId}).then(function(){
+//   console.log("Successfully deleted!");
+//   res.redirect("/")
+// }).catch(function(err){
+// console.log(err);
+//  res.redirect("/")
+// });
+
+
+// });
+     
+app.listen(port, function(){
+console.log("App is listening on port 3000");
+});

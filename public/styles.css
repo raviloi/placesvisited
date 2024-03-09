@@ -1,0 +1,172 @@
+body{
+
+    background-color: white;
+    margin: 0%;
+
+}
+
+h1{
+    color: white;
+
+}
+
+h2{
+    color: #FF7F50;
+    margin-left: 10px;
+
+}
+
+h3{
+
+   color: grey; 
+ 
+}
+p{
+    color: white;
+    
+}
+
+.container_header {
+  display: flex;
+  justify-content: space-between; /* To push the left and right divs to the sides */
+  align-items: center;
+  padding: 10px;
+}
+
+
+.left-div, .right-div {
+  margin: 5px;
+}
+
+.my-svg{
+
+    margin-top: 10px;
+    
+}
+
+.container {
+  max-width: 1170px; /* Adjust this value as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 0 20px; /* Optional: Add padding to the sides */
+}
+
+
+/* Country Visited, home page button */
+
+  .my-button {
+    background-color: white; /* White button background color */
+    border: 2px solid #4CAF50; /* Green border */
+    color: #4CAF50; /* Green text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+    border-radius: 8px; /* Adjust border radius as needed */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    margin: 15px;
+  }
+  
+  .my-button:hover {
+    background-color: #4CAF50; /* Green background color on hover */
+    color: white; /* White text color on hover */
+  }
+
+  /* Header */
+.header{
+    padding: 8px;
+    text-align: left;
+    background: #1abc9c;
+    color: white;
+   
+}
+
+/* Footer */
+
+.bottom-section {
+    background-color: #1abc9c; /* Change to desired color */
+    color: white; 
+    padding: 30px 0; /* Adjust padding as needed */
+    text-align: center;
+    width: 100%;
+    position:relative;
+    bottom: 0;
+}
+
+.bottom-section_add {
+  background-color: #1abc9c; /* Change to desired color */
+  color: white; 
+  padding: 30px 0; /* Adjust padding as needed */
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+   
+}
+
+
+.bottom-section p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+.my-button {
+  background-color: #1abc9c; /* Default button color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.my-button_flush {
+  background-color: orange; /* Default button color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.my-button:hover, .my-button_flush:hover {
+  background-color: #16a085; /* Button color on hover */
+}
+
+
+  /* Input form in Add page */
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s ease-in-out;
+    width: 20%;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  /* Focus effect */
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50; /* Green */
+  }
+
+
+  /* Media queries for smaller screen sizes */
+@media screen and (max-width: 768px) {
+  .container_header {
+    flex-direction: column;
+
+  }
+
+  .left-div, .right-div {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .my-button_flush{
+    margin-left: 15px;
+  }
+}
